@@ -1,0 +1,4 @@
+---
+template_path: cfn/prod_bucketsandrole.yaml
+parameters:
+  AccountToTrust: '188331173690'

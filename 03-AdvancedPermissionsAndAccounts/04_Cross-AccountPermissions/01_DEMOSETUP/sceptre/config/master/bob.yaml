@@ -1,0 +1,4 @@
+---
+template_path: cfn/bob.yaml
+parameters:
+  bobpassword: 'bzWVTawxyHU6nkyFGI6Z1DTZ8ur9v'

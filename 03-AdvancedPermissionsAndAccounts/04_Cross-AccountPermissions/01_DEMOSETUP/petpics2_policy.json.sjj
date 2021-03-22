@@ -1,0 +1,21 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+      {
+          "Effect": "Allow",
+          "Principal": {
+              "AWS": "arn:aws:iam::188331173690:user/cross-acct-s3-master-bob-bob-1PQURRRRB5OJK"
+          },
+          "Action": [
+              "s3:GetObject",
+              "s3:PutObject",
+              "s3:PutObjectAcl",
+              "s3:ListBucket"
+          ],
+          "Resource": [
+              "arn:aws:s3:::cross-acct-s3-prod-s3iam-petpics2-zbix8yxbomse/*",
+              "arn:aws:s3:::cross-acct-s3-prod-s3iam-petpics2-zbix8yxbomse"
+          ]
+      }
+  ]
+}
