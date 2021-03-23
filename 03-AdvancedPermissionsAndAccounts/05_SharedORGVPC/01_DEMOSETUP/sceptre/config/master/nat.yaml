@@ -1,0 +1,4 @@
+---
+template_path: cfn/02_A4L_NATGateways.yaml
+dependencies:
+  - master/vpc.yaml

@@ -1,0 +1,31 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+
+Resources:
+  InstanceAssumeRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Path: "/"
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+
+  SSMInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Path: "/"
+      Roles:
+        - !Ref InstanceAssumeRole
+
+Outputs:
+  SSMInstanceProfile:
+    Description: The SSM instance profile
+    Value: !Ref SSMInstanceProfile

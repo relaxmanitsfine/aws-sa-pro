@@ -1,0 +1,16 @@
+---
+template_path: cfn/ram.yaml
+parameters:
+  OrgId: 'o-4if2wk9smz'
+  SubnetWEBA: !stack_output master/vpc.yaml::a4lvpc1subnetweba
+  SubnetWEBB: !stack_output master/vpc.yaml::a4lvpc1subnetwebb
+  SubnetWEBC: !stack_output master/vpc.yaml::a4lvpc1subnetwebc
+  SubnetAPPA: !stack_output master/vpc.yaml::a4lvpc1subnetappa
+  SubnetAPPB: !stack_output master/vpc.yaml::a4lvpc1subnetappb
+  SubnetAPPC: !stack_output master/vpc.yaml::a4lvpc1subnetappc
+  SubnetDBA: !stack_output master/vpc.yaml::a4lvpc1subnetdba
+  SubnetDBB: !stack_output master/vpc.yaml::a4lvpc1subnetdbb
+  SubnetDBC: !stack_output master/vpc.yaml::a4lvpc1subnetdbc
+  SubnetReservedA: !stack_output master/vpc.yaml::a4lvpc1subnetreserveda
+  SubnetReservedB: !stack_output master/vpc.yaml::a4lvpc1subnetreservedb
+  SubnetReservedC: !stack_output master/vpc.yaml::a4lvpc1subnetreservedc

@@ -1,0 +1,4 @@
+---
+template_path: cfn/security.yaml
+parameters:
+  VpcId: !stack_output master/vpc.yaml::a4lvpc1

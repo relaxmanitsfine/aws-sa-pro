@@ -1,0 +1,7 @@
+---
+template_path: cfn/ec2.yaml
+parameters:
+  InstanceType: t3.nano
+  InstanceSubnetId: !stack_output master/vpc.yaml::a4lvpc1subnetweba
+  InstanceSgId: !stack_output prod/security.yaml::InstanceSg
+  InstanceProfile: !stack_output prod/iam.yaml::SSMInstanceProfile

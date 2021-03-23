@@ -1,0 +1,80 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  OrgId:
+    Type: String
+    Description: The Org to share with
+
+  SubnetWEBA:
+    Type: AWS::EC2::Subnet::Id
+    Description: SubnetWEBA
+
+  SubnetWEBB:
+    Type: AWS::EC2::Subnet::Id
+    Description: SubnetWEBB
+
+  SubnetWEBC:
+    Type: AWS::EC2::Subnet::Id
+    Description: SubnetWEBC
+
+  SubnetAPPA:
+    Type: AWS::EC2::Subnet::Id
+    Description: SubnetAPPA
+
+  SubnetAPPB:
+    Type: AWS::EC2::Subnet::Id
+    Description: SubnetAPPB
+
+  SubnetAPPC:
+    Type: AWS::EC2::Subnet::Id
+    Description: SubnetAPPC
+
+  SubnetDBA:
+    Type: AWS::EC2::Subnet::Id
+    Description: SubnetDBA
+
+  SubnetDBB:
+    Type: AWS::EC2::Subnet::Id
+    Description: SubnetDBB
+
+  SubnetDBC:
+    Type: AWS::EC2::Subnet::Id
+    Description: SubnetDBC
+
+  SubnetReservedA:
+    Type: AWS::EC2::Subnet::Id
+    Description: SubnetReservedA
+
+  SubnetReservedB:
+    Type: AWS::EC2::Subnet::Id
+    Description: SubnetReservedB
+
+  SubnetReservedC:
+    Type: AWS::EC2::Subnet::Id
+    Description: SubnetReservedC
+
+Resources:
+  TgwRamShare:
+    Type: AWS::RAM::ResourceShare
+    Properties:
+      AllowExternalPrincipals: false
+      Name: !Sub '${AWS::StackName} VPC Share with Org'
+      ResourceArns:
+        - !Sub 'arn:aws:ec2:${AWS::Region}:${AWS::AccountId}:subnet/${SubnetWEBA}'
+        - !Sub 'arn:aws:ec2:${AWS::Region}:${AWS::AccountId}:subnet/${SubnetWEBB}'
+        - !Sub 'arn:aws:ec2:${AWS::Region}:${AWS::AccountId}:subnet/${SubnetWEBC}'
+        - !Sub 'arn:aws:ec2:${AWS::Region}:${AWS::AccountId}:subnet/${SubnetAPPA}'
+        - !Sub 'arn:aws:ec2:${AWS::Region}:${AWS::AccountId}:subnet/${SubnetAPPB}'
+        - !Sub 'arn:aws:ec2:${AWS::Region}:${AWS::AccountId}:subnet/${SubnetAPPC}'
+        - !Sub 'arn:aws:ec2:${AWS::Region}:${AWS::AccountId}:subnet/${SubnetDBA}'
+        - !Sub 'arn:aws:ec2:${AWS::Region}:${AWS::AccountId}:subnet/${SubnetDBB}'
+        - !Sub 'arn:aws:ec2:${AWS::Region}:${AWS::AccountId}:subnet/${SubnetDBC}'
+        - !Sub 'arn:aws:ec2:${AWS::Region}:${AWS::AccountId}:subnet/${SubnetReservedA}'
+        - !Sub 'arn:aws:ec2:${AWS::Region}:${AWS::AccountId}:subnet/${SubnetReservedB}'
+        - !Sub 'arn:aws:ec2:${AWS::Region}:${AWS::AccountId}:subnet/${SubnetReservedC}'
+      Principals:
+        - !Sub "arn:aws:organizations::${AWS::AccountId}:organization/${OrgId}"
+      Tags:
+        - Key: "Name"
+          Value: !Sub '${AWS::StackName} VPC Share with Org'
