@@ -1,0 +1,54 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  OnPremAsn:
+    Type: Number
+    Description: The ASN for the on-prem site
+    Default: 65016
+
+  OnPremRouterNameA:
+    Type: String
+    Description: Name of the first on-prem router
+
+  OnPremRouterPublicIpA:
+    Type: String
+    Description: The outside IP of the first on-prem router
+
+  OnPremRouterNameB:
+    Type: String
+    Description: Name of the second on-prem router
+
+  OnPremRouterPublicIpB:
+    Type: String
+    Description: The outside IP of the second on-prem router
+
+Resources:
+  CgwOnPremRouterA:
+    Type: AWS::EC2::CustomerGateway
+    Properties:
+      Type: ipsec.1
+      BgpAsn: !Ref OnPremAsn
+      IpAddress: !Ref OnPremRouterPublicIpA
+      Tags:
+        - Key: Name
+          Value: !Ref OnPremRouterNameA
+
+  CgwOnPremRouterB:
+    Type: AWS::EC2::CustomerGateway
+    Properties:
+      Type: ipsec.1
+      BgpAsn: !Ref OnPremAsn
+      IpAddress: !Ref OnPremRouterPublicIpB
+      Tags:
+        - Key: Name
+          Value: !Ref OnPremRouterNameB
+
+Outputs:
+  CgwOnPremRouterA:
+    Description: On Prem CGW A
+    Value: !Ref CgwOnPremRouterA
+
+  CgwOnPremRouterB:
+    Description: On Prem CGW B
+    Value: !Ref CgwOnPremRouterB

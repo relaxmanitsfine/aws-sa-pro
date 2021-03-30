@@ -1,0 +1,7 @@
+---
+template_path: cfn/cgw.yaml
+parameters:
+  OnPremRouterNameA: "ONPREM-ROUTER1"
+  OnPremRouterNameB: "ONPREM-ROUTER2"
+  OnPremRouterPublicIpA: !stack_output master/vpc-on-prem.yaml::Router1Public
+  OnPremRouterPublicIpB: !stack_output master/vpc-on-prem.yaml::Router2Public
