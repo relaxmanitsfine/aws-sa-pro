@@ -1,0 +1,10 @@
+---
+template_path: cfn/r53-outbound.yaml
+parameters:
+  VpcId: !stack_output master/vpc-aws.yaml::VpcId
+  SubnetA: !stack_output master/vpc-aws.yaml::SubnetA
+  SubnetB: !stack_output master/vpc-aws.yaml::SubnetB
+  Route53OutboundSg: !stack_output master/vpc-aws.yaml::AWSSecurityGroup
+  CorpDomainName: corp.animals4life.org
+  CorpDnsIpA: !stack_output master/vpc-on-prem.yaml::DnsPrivateIpA
+  CorpDnsIpB: !stack_output master/vpc-on-prem.yaml::DnsPrivateIpB

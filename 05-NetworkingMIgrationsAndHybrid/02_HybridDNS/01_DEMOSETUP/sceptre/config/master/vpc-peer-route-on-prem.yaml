@@ -1,0 +1,6 @@
+---
+template_path: cfn/vpc-peer-route.yaml
+parameters:
+  RouteTableId: !stack_output master/vpc-on-prem.yaml::RouteTablePrivate
+  PeerCIDR: 10.16.0.0/16
+  VpcPeeringId: !stack_output master/vpc-peer.yaml::VpcPeeringConnection

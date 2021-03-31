@@ -1,0 +1,6 @@
+---
+template_path: cfn/r53-inbound.yaml
+parameters:
+  SubnetA: !stack_output master/vpc-aws.yaml::SubnetA
+  SubnetB: !stack_output master/vpc-aws.yaml::SubnetB
+  Route53InboundSg: !stack_output master/vpc-aws.yaml::AWSSecurityGroup

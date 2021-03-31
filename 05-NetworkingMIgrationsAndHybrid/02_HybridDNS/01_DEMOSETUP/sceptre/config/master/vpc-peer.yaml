@@ -1,0 +1,5 @@
+---
+template_path: cfn/vpc-peer.yaml
+parameters:
+  VpcId: !stack_output master/vpc-aws.yaml::VpcId
+  PeerVpcId: !stack_output master/vpc-on-prem.yaml::VpcId

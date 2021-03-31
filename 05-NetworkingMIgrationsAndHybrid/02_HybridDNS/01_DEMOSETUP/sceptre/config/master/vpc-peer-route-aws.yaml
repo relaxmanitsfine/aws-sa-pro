@@ -1,0 +1,6 @@
+---
+template_path: cfn/vpc-peer-route.yaml
+parameters:
+  RouteTableId: !stack_output master/vpc-aws.yaml::RouteTablePrivate
+  PeerCIDR: 192.168.10.0/24
+  VpcPeeringId: !stack_output master/vpc-peer.yaml::VpcPeeringConnection

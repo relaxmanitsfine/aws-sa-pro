@@ -1,0 +1,32 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  SubnetA:
+    Type: AWS::EC2::Subnet::Id
+    Description: The subnet for AZ 1
+
+  SubnetB:
+    Type: AWS::EC2::Subnet::Id
+    Description: The subnet for AZ 2
+
+  Route53InboundSg:
+    Type: AWS::EC2::SecurityGroup::Id
+    Description: The security group for the Inbound Route53 End point
+
+Resources:
+  Route53InboundEndpoint:
+    Type: AWS::Route53Resolver::ResolverEndpoint
+    Properties:
+      Name: InboundRoute53
+      Direction: Inbound
+      IpAddresses:
+        - SubnetId: !Ref SubnetA
+        - SubnetId: !Ref SubnetB
+      SecurityGroupIds:
+          - !Ref Route53InboundSg
+                  
+Outputs:
+  Route53InboundEndpoint:
+    Description: The Route53 inbound endpoint
+    Value: !Ref Route53InboundEndpoint

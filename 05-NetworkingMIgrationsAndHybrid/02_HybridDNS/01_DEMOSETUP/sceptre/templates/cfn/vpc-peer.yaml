@@ -1,0 +1,23 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+    Description: The VPC this peering connection comes from
+
+  PeerVpcId:
+    Type: String
+    Description: The VPC to target this peering connection to
+
+Resources:
+  VpcPeeringConnection:
+    Type: AWS::EC2::VPCPeeringConnection
+    Properties:
+      VpcId: !Ref VpcId
+      PeerVpcId: !Ref PeerVpcId
+                  
+Outputs:
+  VpcPeeringConnection:
+    Description: The ID of this peering connections
+    Value: !Ref VpcPeeringConnection

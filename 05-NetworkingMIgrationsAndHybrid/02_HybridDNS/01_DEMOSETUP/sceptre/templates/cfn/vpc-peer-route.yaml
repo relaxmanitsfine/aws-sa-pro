@@ -1,0 +1,23 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  RouteTableId:
+    Type: String
+    Description: The VPC this security group resides in
+
+  PeerCIDR:
+    Description: The CIDR of the peer VPC
+    Type: String
+
+  VpcPeeringId:
+    Description: The ID of the Peering connection
+    Type: String
+
+Resources:
+  RoutePeer:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref RouteTableId
+      DestinationCidrBlock: !Ref PeerCIDR
+      VpcPeeringConnectionId: !Ref VpcPeeringId

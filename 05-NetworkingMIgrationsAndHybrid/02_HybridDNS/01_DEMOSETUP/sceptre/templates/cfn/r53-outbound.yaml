@@ -1,0 +1,68 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+    Description: The VPC this outbound dns is for
+
+  SubnetA:
+    Type: AWS::EC2::Subnet::Id
+    Description: The subnet for AZ 1
+
+  SubnetB:
+    Type: AWS::EC2::Subnet::Id
+    Description: The subnet for AZ 2
+
+  Route53OutboundSg:
+    Type: AWS::EC2::SecurityGroup::Id
+    Description: The security group for the Outbound Route53 End point
+
+  CorpDomainName:
+    Type: String
+    Description: Corp on-prem DNS name
+
+  CorpDnsIpA:
+    Type: String
+    Description: Corp on-prem DNS server IP A
+
+  CorpDnsIpB:
+    Type: String
+    Description: Corp on-prem DNS server IP B
+
+Resources:
+  Route53OutboundEndpoint:
+    Type: AWS::Route53Resolver::ResolverEndpoint
+    Properties:
+      Name: OutboundRoute53
+      Direction: Outbound
+      IpAddresses:
+        - SubnetId: !Ref SubnetA
+        - SubnetId: !Ref SubnetB
+      SecurityGroupIds:
+          - !Ref Route53OutboundSg
+  
+  CorpDnsResolverRule:
+    Type: AWS::Route53Resolver::ResolverRule
+    Properties: 
+      DomainName: !Ref CorpDomainName
+      Name: 'corp resolver rule'
+      ResolverEndpointId: !Ref Route53OutboundEndpoint
+      RuleType: FORWARD 
+      TargetIps:
+        - Ip: !Ref CorpDnsIpA
+          Port: 53
+        - Ip: !Ref CorpDnsIpB
+          Port: 53
+
+  CorpDnsResolverRuleAssoc:
+    Type: AWS::Route53Resolver::ResolverRuleAssociation
+    Properties: 
+      Name: 'corp resolver rule association'
+      ResolverRuleId: !Ref CorpDnsResolverRule
+      VPCId: !Ref VpcId
+                  
+Outputs:
+  Route53OutboundEndpoint:
+    Description: The Route53 outbound endpoint
+    Value: !Ref Route53OutboundEndpoint
